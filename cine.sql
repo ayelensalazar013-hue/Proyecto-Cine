@@ -2,20 +2,16 @@ DROP DATABASE IF EXISTS Cine;
 CREATE DATABASE Cine;
 USE Cine;
 
--- =================================================================
--- 1. CREACIÓN DE TABLAS
--- =================================================================
-
--- Table: Cine
+-- 1. CINE
 CREATE TABLE Cine (
     id_cine INT AUTO_INCREMENT PRIMARY KEY,
     nom_centrocomercial VARCHAR(100),
     direccion VARCHAR(150),
     nombre_cine VARCHAR(100),
     cant_salas INT
-);
+) ENGINE=InnoDB;
 
--- Table: Empleado
+-- 2. EMPLEADO
 CREATE TABLE Empleado (
     id_empleado INT AUTO_INCREMENT PRIMARY KEY,
     id_cine INT,
@@ -24,9 +20,9 @@ CREATE TABLE Empleado (
     cuit_emp VARCHAR(20),
     cargo_emp VARCHAR(50),
     FOREIGN KEY (id_cine) REFERENCES Cine(id_cine) ON DELETE CASCADE ON UPDATE CASCADE
-);
+) ENGINE=InnoDB;
 
--- Table: Sala
+-- 3. SALA
 CREATE TABLE Sala (
     id_sala INT AUTO_INCREMENT PRIMARY KEY,
     id_cine INT,
@@ -36,9 +32,9 @@ CREATE TABLE Sala (
     nro_butaca INT NULL,
     butaca_estado VARCHAR(20) NULL,
     FOREIGN KEY (id_cine) REFERENCES Cine(id_cine) ON DELETE CASCADE ON UPDATE CASCADE
-);
+) ENGINE=InnoDB;
 
--- Table: Pelicula
+-- 4. PELICULA
 CREATE TABLE Pelicula (
     id_pelicula INT AUTO_INCREMENT PRIMARY KEY,
     nombre_pel VARCHAR(100),
@@ -47,9 +43,9 @@ CREATE TABLE Pelicula (
     pais_origen VARCHAR(50),
     genero_pel VARCHAR(50),
     pel_estado VARCHAR(20)
-);
+) ENGINE=InnoDB;
 
--- Table: Precio
+-- 5. PRECIO
 CREATE TABLE Precio (
     id_precio INT AUTO_INCREMENT PRIMARY KEY,
     id_cine INT,
@@ -57,9 +53,9 @@ CREATE TABLE Precio (
     dia_semana VARCHAR(20),
     monto DECIMAL(10,2),
     FOREIGN KEY (id_cine) REFERENCES Cine(id_cine) ON DELETE CASCADE ON UPDATE CASCADE
-);
+) ENGINE=InnoDB;
 
--- Table: Cliente
+-- 6. CLIENTE
 CREATE TABLE Cliente (
     id_cliente INT AUTO_INCREMENT PRIMARY KEY,
     nombre_cli VARCHAR(100),
@@ -68,16 +64,16 @@ CREATE TABLE Cliente (
     email_cli VARCHAR(100),
     telefono_cli VARCHAR(20),
     fecha_nacimiento_cli DATE
-);
+) ENGINE=InnoDB;
 
--- Table: Funcion
+-- 7. FUNCION
 CREATE TABLE Funcion (
     id_funcion INT AUTO_INCREMENT PRIMARY KEY,
     fecha_hora_funcion DATETIME,
     tipo_funcion VARCHAR(50)
-);
+) ENGINE=InnoDB;
 
--- Table: Programacion
+-- 8. PROGRAMACION
 CREATE TABLE Programacion (
     id_programacion_sem INT AUTO_INCREMENT PRIMARY KEY,
     id_funcion INT,
@@ -86,9 +82,9 @@ CREATE TABLE Programacion (
     FOREIGN KEY (id_funcion) REFERENCES Funcion(id_funcion) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (id_pelicula) REFERENCES Pelicula(id_pelicula) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (id_sala) REFERENCES Sala(id_sala) ON DELETE CASCADE ON UPDATE CASCADE
-);
+) ENGINE=InnoDB;
 
--- Table: Comprobante_venta
+-- 9. COMPROBANTE_VENTA
 CREATE TABLE Comprobante_venta (
     id_comprobante_venta INT AUTO_INCREMENT PRIMARY KEY,
     nro_venta VARCHAR(50),
@@ -102,9 +98,9 @@ CREATE TABLE Comprobante_venta (
     FOREIGN KEY (id_sala) REFERENCES Sala(id_sala) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (id_pelicula) REFERENCES Pelicula(id_pelicula) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente) ON DELETE SET NULL ON UPDATE CASCADE
-);
+) ENGINE=InnoDB;
 
--- Table: Entradas
+-- 10. ENTRADAS
 CREATE TABLE Entradas (
     id_entrada INT AUTO_INCREMENT PRIMARY KEY,
     id_comprobante_venta INT,
@@ -116,4 +112,4 @@ CREATE TABLE Entradas (
     FOREIGN KEY (id_comprobante_venta) REFERENCES Comprobante_venta(id_comprobante_venta) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (id_funcion) REFERENCES Funcion(id_funcion) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (id_precio) REFERENCES Precio(id_precio) ON DELETE CASCADE ON UPDATE CASCADE
-);
+) ENGINE=InnoDB;
