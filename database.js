@@ -19,9 +19,6 @@ window.AppDB = {
             // Si no existe localmente, crear esquema de CINE
             this.db = new SQL.Database();
             
-            // =========================================================
-            // AQUÍ VAN TUS TABLAS DE CINE (Sintaxis SQLite)
-            // =========================================================
             this.db.run(`
                 CREATE TABLE IF NOT EXISTS Cine (
                     id_cine INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -125,8 +122,7 @@ window.AppDB = {
                     FOREIGN KEY (id_precio) REFERENCES Precio(id_precio) ON DELETE CASCADE ON UPDATE CASCADE
                 );
             `);
-
-            // Datos de prueba iniciales de Cine
+            
             this.db.run(`
                 INSERT INTO Cine (nom_centrocomercial, direccion, nombre_cine, cant_salas) VALUES 
                 ('Abasto Shopping', 'Av. Corrientes 3247, CABA', 'Cine Hoyts Abasto', 12);
@@ -142,7 +138,7 @@ window.AppDB = {
         }
     },
 
-    // --- LEER DE OPFS ---
+    // LEER DE OPFS 
     readFromOPFS: async function() {
         try {
             const root = await navigator.storage.getDirectory();
@@ -156,7 +152,7 @@ window.AppDB = {
         }
     },
 
-    // --- GUARDAR EN OPFS ---
+    // GUARDAR EN OPFS
     save: async function() {
         try {
             const data = this.db.export();
@@ -170,7 +166,7 @@ window.AppDB = {
         }
     },
 
-    // --- DESCARGAR ARCHIVO BASE DE DATOS LOCALMENTE ---
+    // DESCARGAR ARCHIVO BASE DE DATOS LOCALMENTE
     downloadDB: async function() {
         const fileData = await this.readFromOPFS();
         if (!fileData) return alert("No hay datos cargados.");
