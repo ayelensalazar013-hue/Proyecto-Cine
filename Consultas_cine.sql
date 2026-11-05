@@ -1,0 +1,169 @@
+USE Cine;
+
+/* SCRIPT 1: Top 5 películas más vendidas */ 
+SELECT 
+    Pelicula.id_pelicula,
+    Pelicula.nombre_pel,
+    Pelicula.genero_pel,
+    COUNT(Entradas.id_entrada) AS total_entradas_vendidas
+FROM Entradas
+JOIN Comprobante_venta ON Entradas.id_comprobante_venta = Comprobante_venta.id_comprobante_venta
+JOIN Pelicula ON Comprobante_venta.id_pelicula = Pelicula.id_pelicula
+GROUP BY Pelicula.id_pelicula, Pelicula.nombre_pel, Pelicula.genero_pel
+ORDER BY total_entradas_vendidas DESC
+LIMIT 5;
+
+/* SCRIPT 2: Cartelera de funciones programadas para una fecha específica */
+SELECT 
+    Cine.nombre_cine,
+    Sala.nro_sala,
+    Pelicula.nombre_pel,
+    Funcion.fecha_hora_funcion,
+    Funcion.tipo_funcion
+FROM Funcion
+JOIN Programacion ON Funcion.id_funcion = Programacion.id_funcion
+JOIN Pelicula ON Programacion.id_pelicula = Pelicula.id_pelicula
+JOIN Sala ON Programacion.id_sala = Sala.id_sala
+JOIN Cine ON Sala.id_cine = Cine.id_cine
+WHERE DATE(Funcion.fecha_hora_funcion) = '2026-11-15'
+ORDER BY Cine.nombre_cine, Sala.nro_sala, Funcion.fecha_hora_funcion;
+
+/* SCRIPT 3: Catálogo general de películas activas */
+SELECT 
+    id_pelicula,
+    nombre_pel,
+    genero_pel,
+    duracion_min,
+    calificacion_pel,
+    pais_origen,
+    pel_estado
+FROM Pelicula
+WHERE pel_estado = 'Activa'
+ORDER BY nombre_pel ASC;
+
+/* SCRIPT 4: Búsqueda general de cliente por DNI o apellido */
+SELECT 
+    id_cliente,
+    nombre_cli,
+    apellido_cli,
+    dni_cli,
+    email_cli,
+    telefono_cli
+FROM Cliente
+WHERE dni_cli = '12345678' 
+   OR apellido_cli LIKE '%Gomez%';
+
+/* SCRIPT 5: Control de estado de reservas de entradas por función */
+SELECT 
+    Entradas.id_entrada,
+    Entradas.id_funcion,
+    Entradas.tipo_entrada,
+    Entradas.reserva_estado,
+    Entradas.fecha_venta_entrada
+FROM Entradas
+WHERE Entradas.reserva_estado = 'Reservada'
+ORDER BY Entradas.fecha_venta_entrada DESC;
+
+/* SCRIPT 6: Filtrado del catálogo de películas de producción nacional */
+SELECT
+    Pelicula.nombre_pel,
+    Pelicula.genero_pel,
+    Pelicula.calificacion_pel,
+    Pelicula.pais_origen
+FROM Pelicula
+WHERE Pelicula.pais_origen = 'Argentina';
+
+/* SCRIPT 7: Listado de funciones clasificadas por categoría comercial (Estrenos y Preestrenos) */
+SELECT
+    Funcion.id_funcion,
+    Pelicula.nombre_pel,
+    Funcion.tipo_funcion,
+    Funcion.fecha_hora_funcion
+FROM Funcion
+JOIN Programacion ON Funcion.id_funcion = Programacion.id_funcion
+JOIN Pelicula ON Programacion.id_pelicula = Pelicula.id_pelicula
+WHERE Funcion.tipo_funcion IN ('Estreno', 'Preestreno');
+
+/* SCRIPT 8: Consulta de estado de butacas por sala */
+SELECT 
+    Sala.id_sala,
+    Sala.nro_sala,
+    Sala.nro_butaca,
+    Sala.butaca_estado
+FROM Sala
+WHERE Sala.id_sala = 1 
+  AND Sala.butaca_estado = 'Disponible';
+
+/* SCRIPT 9: Listado de películas por género y duración (Para armado de catálogo) */
+SELECT 
+    nombre_pel,
+    duracion_min,
+    calificacion_pel,
+    pais_origen
+FROM Pelicula
+WHERE genero_pel = 'Animación'
+ORDER BY duracion_min DESC;
+
+/* SCRIPT 10: Auditoría de actualización de la ficha técnica de películas */
+SELECT 
+    id_pelicula,
+    nombre_pel,
+    duracion_min,
+    calificacion_pel
+FROM Pelicula
+WHERE pais_origen IS NULL OR genero_pel IS NULL;
+
+/* SCRIPT 11: Lista completa de películas en proyección por sede y sala */
+SELECT
+    Cine.nombre_cine,
+    Sala.nro_sala,
+    Pelicula.nombre_pel,
+    Pelicula.calificacion_pel,
+    Pelicula.duracion_min
+FROM Programacion
+JOIN Sala ON Programacion.id_sala = Sala.id_sala
+JOIN Cine ON Sala.id_cine = Cine.id_cine
+JOIN Pelicula ON Programacion.id_pelicula = Pelicula.id_pelicula;
+
+/* SCRIPT 12: Organización de horarios (Películas de larga duración > 120 min) */
+SELECT
+    Pelicula.nombre_pel,
+    Pelicula.duracion_min,
+    Pelicula.genero_pel
+FROM Pelicula
+WHERE Pelicula.duracion_min > 120;
+
+/* SCRIPT 13: Clasificación de películas por edades (ATP) */
+SELECT
+    Pelicula.nombre_pel,
+    Pelicula.calificacion_pel,
+    Pelicula.pais_origen
+FROM Pelicula
+WHERE Pelicula.calificacion_pel = 'ATP';
+
+/* SCRIPT 14: Datos del comprobante de venta y entradas*/
+SELECT
+    Comprobante_venta.nro_venta,
+    Comprobante_venta.fecha_venta,
+    Entradas.id_funcion AS nro_funcion,
+    Sala.nro_sala,
+    Pelicula.nombre_pel,
+    Comprobante_venta.horario_desde AS hora_funcion,
+    Precio.monto AS precio,
+    Entradas.tipo_entrada,
+    Pelicula.calificacion_pel
+FROM Entradas
+JOIN Comprobante_venta ON Entradas.id_comprobante_venta = Comprobante_venta.id_comprobante_venta
+JOIN Sala ON Comprobante_venta.id_sala = Sala.id_sala
+JOIN Pelicula ON Comprobante_venta.id_pelicula = Pelicula.id_pelicula
+JOIN Precio ON Entradas.id_precio = Precio.id_precio;
+
+/* SCRIPT 15: Verificar disponibilidad de salas habilitadas para programador */
+SELECT
+    Cine.nombre_cine,
+    Sala.nro_sala,
+    Sala.cant_butacas,
+    Sala.sala_estado
+FROM Sala
+JOIN Cine ON Sala.id_cine = Cine.id_cine
+WHERE Sala.sala_estado = 'Habilitada';
