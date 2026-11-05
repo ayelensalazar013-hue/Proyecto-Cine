@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Círculo Cine: cartelera, horarios y reserva de butacas."
+    />
+    <title>Círculo Cine</title>
+    <link rel="stylesheet" href="CSS/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#inicio" aria-label="Círculo Cine, inicio">
+          <svg
+            class="cc-logo heritage-logo"
+            viewBox="0 0 72 42"
+            aria-hidden="true"
+          >
+            <path d="M39 8.5a17.5 17.5 0 1 0 0 25"></path>
+            <path d="M33 8.5a17.5 17.5 0 1 1 0 25"></path>
+            <path class="logo-cut" d="M39 33.5h-7.5M33 8.5h7.5"></path>
+          </svg>
+          <span>Círculo<b>Cine</b></span>
+        </a>
+
+        <nav class="main-nav" id="main-nav">
+          <a href="#cartelera">Cartelera</a>
+          <a href="#cines">Cines</a>
+          <a href="#beneficios">Beneficios</a>
+        </nav>
+
+        <div class="header-tools">
+          <label class="location-picker">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"
+              ></path>
+              <circle cx="12" cy="10" r="2"></circle>
+            </svg>
+            <span class="sr-only">Elegí tu ubicación</span>
+            <select id="location">
+              <option>CABA</option>
+              <option>Córdoba</option>
+              <option>Rosario</option>
+              <option>Mendoza</option>
+            </select>
+          </label>
+          <button
+            class="menu-toggle"
+            id="menu-toggle"
+            type="button"
+            aria-label="Abrir menú"
+            aria-expanded="false"
+          >
+            <span></span><span></span>
+          </button>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero" id="inicio">
+          <img
+            class="hero-image"
+            src="https://images.unsplash.com/photo-1688678004647-945d5aaf91c1?auto=format&fit=crop&w=1800&q=90"
+            alt="Una sala de cine durante una proyección"
+          />
+          <div class="hero-shade"></div>
+          <div class="hero-content">
+            <p class="overline">Estrenos en pantalla grande</p>
+            <h1>Historias que<br />nos <em>encuentran.</em></h1>
+            <p class="hero-description">
+              Elegí tu película, reservá tus butacas y viví una experiencia de
+              cine inolvidable.
+            </p>
+            <a class="primary-button" href="#cartelera">
+              Ver cartelera
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h13M13 7l5 5-5 5"></path>
+              </svg>
+            </a>
+          </div>
+          <div class="hero-index">
+            <span>01</span>
+            <div><i></i><i></i><i></i></div>
+            <span>03</span>
+          </div>
+        </section>
+
+        <section class="programming" id="cartelera">
+          <div class="section-header">
+            <div>
+              <p class="overline dark">En nuestros cines</p>
+              <h2>En cartelera</h2>
+            </div>
+            <div class="update-note">
+              <span></span>Cartelera actualizada · Nuevas funciones
+            </div>
+          </div>
+
+          <div class="filter-panel">
+            <div
+              class="filter-row"
+              id="filter-categories"
+              aria-label="Tipo de filtro"
+            ></div>
+            <div
+              class="subfilter-row"
+              id="filter-options"
+              aria-label="Opciones del filtro"
+            ></div>
+          </div>
+
+          <div class="movie-grid" id="movie-grid"></div>
+        </section>
+
+        <section class="spaces" id="cines">
+          <div class="spaces-copy">
+            <p class="overline">Tu cine, tu momento</p>
+            <h2>
+              Una gran experiencia<br />
+              en <em>cada función.</em>
+            </h2>
+            <p>
+              Salas con proyección de última generación, sonido envolvente y
+              las butacas más cómodas para disfrutar cada historia.
+            </p>
+            <button type="button" id="choose-cinema">
+              Elegí tu cine
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h13M13 7l5 5-5 5"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="spaces-photo">
+            <img
+              src="https://images.unsplash.com/photo-1717915604557-94283edbcc1b?auto=format&fit=crop&w=1200&q=85"
+              alt="Sala de cine con butacas rojas"
+            />
+            <div class="space-stat">
+              <strong>8</strong><span>complejos para elegir</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="benefits" id="beneficios">
+          <div>
+            <span>01</span>
+            <h3>Miércoles 2×1</h3>
+            <p>Dos entradas al precio de una en funciones seleccionadas.</p>
+          </div>
+          <div>
+            <span>02</span>
+            <h3>Club Círculo</h3>
+            <p>Sumá puntos en cada visita y canjealos por entradas y combos.</p>
+          </div>
+          <div>
+            <span>03</span>
+            <h3>Combo online</h3>
+            <p>Comprá antes de venir y retiralo sin hacer fila.</p>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <a class="brand footer-brand" href="#inicio">
+          <svg class="cc-logo" viewBox="0 0 72 42" aria-hidden="true">
+            <path d="M36 8A17 17 0 1 0 36 34"></path>
+            <path d="M36 8A17 17 0 1 1 36 34"></path>
+          </svg>
+          <span>Círculo <b>Cine</b></span>
+        </a>
+        <p>Tu próxima historia empieza acá.</p>
+        <span>Privacidad · Términos · Ayuda</span>
+      </footer>
+    </div>
+
+    <div class="modal-backdrop" id="modal" hidden>
+      <div
+        class="schedule-modal"
+        id="modal-content"
+        role="dialog"
+        aria-modal="true"
+      ></div>
+    </div>
+
+    <script src="JS/script.js"></script>
+  </body>
+</html>
