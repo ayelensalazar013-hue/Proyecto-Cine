@@ -1,0 +1,80 @@
+SCRIPT 1: Top 5 películas más vendidas 
+
+τ total_entradas_vendidas DESC, Limit 5 ( id_pelicula, nombre_pel, genero_pel 𝓖
+count ( id_entrada) →total_entradas_vendidas (Entradas ⋈ Comprobante_venta ⋈
+Pelicula)
+
+
+SCRIPT 2: Cartelera de funciones programadas para una fecha específica 
+
+τ nombre_cine, nro_sala, fecha_hora_funcion (π nombre_cine, nro_sala, nombre_pel,
+fecha_hora_funcion, tipo_funcion (σ DATE(fecha_hora_funcion)= ‘2026-11-15’
+(Funcion ⋈ Programacion ⋈ Pelicula ⋈ Sala ⋈ Cine)))
+
+
+SCRIPT 3: Catálogo general de películas activas
+
+τ nombre_pel ASC (π id_pelicula, comnre_pel, genero_pel, duracion_min,
+calificaion_pel, pais_origen, pel_estado (σ pel_estado= ‘activa’ (Pelicula)))
+
+SCRIPT 4: Búsqueda general de cliente por DNI o apellido
+
+π id_cliente, nombre_cli. apellido_cli, dni_cli, email_cli, telefono_cli (σ
+dni_cli= ‘12345678’ ⋁ apellido_cli LIKE ‘%Gomez%’ (Cliente))
+
+SCRIPT 5: Control de estado de reservas de entradas por función
+
+τ fecha_venta_entrada DESC (π id_entrada, id_funcion, tipo_entrada,
+reserva_estado, fecha_venta_entrada (σ reserva_estado= ‘Reservada’ (Entradas)))
+
+SCRIPT 6: Filtrado del catálogo de películas de producción nacional
+
+π nombre_pel, genero_pel, calificacion_pel, pais_origen (σ pais_origen=
+‘Argentina’ (Pelicula))
+
+SCRIPT 7: Listado de funciones clasificadas por categoría comercial (Estrenos y
+Preestrenos)
+
+π id_funcion, nombre_pel, tipo_funcion, fecha_hora_funcion (σ tipo_funcion=
+‘Estreno’ ∨ tipo_funcion= ‘Preestreno’ (Funcion ⋈ Programacion ⋈ Pelicula)
+
+SCRIPT 8: Consulta de estado de butacas por sala
+
+π id_sala, nro_sala, nro_butaca, butaca_estado (σ id_sala= 1 ⋀ butaca_estado =
+‘Disponible’ (Sala))
+
+SCRIPT 9: Listado de peliculas por género y duración
+
+τ duracion_min DESC (π nombre_pel, duracion_min, calificacion_pel, pais_origen (σ
+genero_pel= ‘Animación’ (Pelicula)))
+
+SCRIPT 10: Auditoría de actualización de la ficha técnica de películas
+
+π id_pelicula, nombre_pel, duracion_min, calificacion_pel (σ pais_origen IS NULL
+∨ genero_pel IS NULL (Pelicula))
+
+SCRIPT 11: Lista completa de películas en proyección por sede y sala
+
+π nombre_cine, nro_sala, nombre_pel, calificacion_pel, duracion_min (Programacion
+⋈ Sala ⋈ Cine ⋈ Pelicula)
+
+SCRIPT 12: Organización de horarios (Películas de larga duración > 120 min)
+
+π nombre_pel, duracion_min, genero_pel (σ duracion_min> 120 (Pelicula))
+
+SCRIPT 13: Calificación de películas por edades (ATP)
+
+π nombre_pel, calificacion_pel, pais_origen (σ calificacion_pel= ‘ATP’
+(Pelicula))
+
+SCRIPT 14: Datos del comprobante de venta y entradas
+
+π nro_venta, fecha_venta, id_funcion→
+nro_funcion, nro_sala, nombre_pel, horario_desde→ hora_funcion, monto→ precio,
+tipo_entrada, calificacion_pel (Entradas ⋈ Comprobante_venta ⋈ Sala ⋈ Pelicula
+⋈ Precio)
+
+SCRIPT 15: Verificar disponibilidad de salas habilitadas para programador
+
+π nombre_cine, nro_sala, cant_butacas, sala_estado (σ sala_estado= ‘Habilitada’
+(Sala ⋈ Cine))
