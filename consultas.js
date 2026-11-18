@@ -125,15 +125,15 @@ const ConsultasCine = {
         `);
     },
 
-    // Script 12: Películas de larga duración (> 120 min)
-    getPeliculasLargas: function() {
+    // Script 12: Tarifario de precios vigente
+    getTarifarioPrecios: function() {
         return window.AppDB.query(`
-            SELECT nombre_pel, duracion_min, genero_pel
-            FROM Pelicula
-            WHERE duracion_min > 120;
+            SELECT id_precio, monto
+            FROM Precio
+            ORDER BY monto ASC;
         `);
     },
-
+    
     // Script 13: Películas ATP
     getPeliculasATP: function() {
         return window.AppDB.query(`
@@ -164,6 +164,25 @@ const ConsultasCine = {
             WHERE Sala.sala_estado = 'Habilitada';
         `);
     },
+
+    // Script 16: Películas de corta duración (menor a 90 min)
+    getPeliculasCortas: function() {
+        return window.AppDB.query(`
+            SELECT nombre_pel, duracion_min, genero_pel
+            FROM Pelicula
+            WHERE duracion_min < 90;
+        `);
+    },
+
+    // Script 17: Películas de duración media (entre 90 y 120 min)
+    getPeliculasDuracionMedia: function() {
+        return window.AppDB.query(`
+            SELECT nombre_pel, duracion_min, genero_pel
+            FROM Pelicula
+            WHERE duracion_min BETWEEN 90 AND 120;
+        `);
+    },
+
     obtenerMatrizSala: function(idFuncion, idSala, filas = 10, columnas = 10) {
         const entradasOcupadas = window.AppDB.query(`
             SELECT Sala.nro_butaca 
@@ -200,5 +219,3 @@ const ConsultasCine = {
 };
 
 window.ConsultasCine = ConsultasCine;
-
-
