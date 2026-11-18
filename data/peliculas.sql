@@ -1,0 +1,23 @@
+INSERT INTO Pelicula (id_pelicula, nombre_pel, duracion_min, calificacion_pel, pais_origen, genero_pel, pel_estado)
+VALUES 
+(1, '4 HISTORIAS INCREIBLES', 82, '+13', 'Argentina', 'Comedia', 'En cartelera'),
+(2, 'PERTENENCIAS', 82, 'ATP', 'Argentina', 'Documental', 'En cartelera'),
+(3, '¿QUERES SER MI HIJO?', 98, '+13', 'Argentina', 'Comedia', 'En cartelera'),
+(4, 'DESOBEDIENTE', 109, '+13', 'Argentina', 'Documental', 'En cartelera'),
+(5, 'LA CASA', 108, '+13', 'Argentina', 'Suspenso', 'En cartelera'),
+(6, 'LO DEJAMOS ACA', 98, '+13', 'Argentina', 'Comedia', 'En cartelera'),
+(7, 'PEPITA LA PISTOLERA', 103, '+18', 'Argentina', 'Suspenso', 'En cartelera'),
+(8, 'RETRATO, ELOGIO AL DUELO', 79, '+13', 'Argentina', 'Drama', 'Estreno'),
+(9, 'EL LLANTO DEL PERRO', 72, '+18', 'Argentina', 'Terror', 'Estreno'),
+(10, 'ANNEMARIE', 75, 'ATP', 'Argentina', 'Documental', 'Estreno'),
+(11, 'HOSPITAL BRITANICO', 70, 'ATP', 'Argentina', 'Documental', 'Estreno'),
+(12, 'MUSEO DE LA SUBVERSION', 68, 'ATP', 'Argentina', 'Documental', 'Estreno'),
+(13, 'LA YEGUA DE TROYA', 64, 'ATP', 'Argentina', 'Documental', 'En cartelera'),
+(14, 'ABUELO GAUCHO', 66, 'ATP', 'Argentina', 'Documental', 'En cartelera'),
+(15, 'OLIVIA', 126, '+13', 'Argentina', 'Drama', 'En cartelera'),
+(16, 'TRES ADIOSES', 122, 'ATP', 'España', 'Drama', 'Estreno'),
+(17, 'EL BAÑO DEL PAPA', 100, '+13', 'Uruguay', 'Drama', 'Estreno'),
+(18, 'MADRE SINIESTRA', 93, '+13', 'Estados Unidos', 'Terror', 'Preestreno'),
+(19, 'LOS OTROS', 105, '+13', 'España', 'Terror', 'Preestreno'),
+(20, 'JEANNE DIELMAN,23,QUAI DU COMMERCE,1080 BRUXELLES', 0, '+18', 'Bélgica', 'Drama', 'Preestreno'),
+(21, 'LA CONVERSACION', 0, '+18', 'Estados Unidos', 'Suspenso', 'Estreno');
