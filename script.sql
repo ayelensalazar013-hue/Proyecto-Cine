@@ -7,7 +7,7 @@ const movies = [
     durationMinutes: 82,
     rating: "+13",
     release: "En cartelera",
-    image:"IMG/pelicula/4historiasincreibles.jpg",
+    image:"img/4historiasincreibles.jpg",
     times: ["15:20", "18:10", "21:00"],
   },
   {
