@@ -167,3 +167,19 @@ SELECT
 FROM Sala
 JOIN Cine ON Sala.id_cine = Cine.id_cine
 WHERE Sala.sala_estado = 'Habilitada';
+
+/* Script 16: Películas de corta duración (menor a 90 min) */
+SELECT 
+    nombre_pel, 
+    duracion_min, 
+    genero_pel
+FROM Pelicula
+WHERE duracion_min < 90;
+
+/* Script 17: Películas de duración media (entre 90 y 120 min) */
+SELECT 
+    nombre_pel, 
+    duracion_min, 
+    genero_pel
+FROM Pelicula
+WHERE duracion_min BETWEEN 90 AND 120;
