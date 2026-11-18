@@ -7,7 +7,7 @@ const movies = [
     durationMinutes: 82,
     rating: "+13",
     release: "En cartelera",
-    image:"IMG/peliculas/4historiasincreibles.jpg",
+    image:"img/4historiasincreibles.jpg",
     times: ["15:20", "18:10", "21:00"],
   },
   {
@@ -18,7 +18,7 @@ const movies = [
     durationMinutes: 82,
     rating: "ATP",
     release: "En cartelera",
-    image:"IMG/peliculas/pertenencias.jpg",
+    image:"img/pertenencias.jpg",
     times: ["16:00", "19:15", "22:10"],
   },
   {
@@ -29,7 +29,7 @@ const movies = [
     durationMinutes: 98,
     rating: "+13",
     release: "En cartelera",
-    image:"IMG/peliculas/queressermihijo.jpg",
+    image:"img/queressermihijo.jpg",
     imagePosition: "center 22%",
     times: ["17:40", "20:30", "23:00"],
   },
@@ -41,7 +41,7 @@ const movies = [
     durationMinutes: 109,
     rating: "+13",
     release: "En cartelera",
-    image:"IMG/peliculas/desobediente.jpg",
+    image:"img/desobediente.jpg",
     imagePosition: "center 25%",
     times: ["15:00", "18:30", "21:40"],
   },
@@ -53,7 +53,7 @@ const movies = [
     durationMinutes: 108,
     rating: "+13",
     release: "En cartelera",
-    image:"IMG/peliculas/lacasa.jpg",
+    image:"img/lacasa.jpg",
     times: ["14:40", "17:30", "20:20"],
   },
   {
@@ -64,7 +64,7 @@ const movies = [
     durationMinutes: 98,
     rating: "+13",
     release: "En cartelera",
-    image:"IMG/peliculas/lodejamosaca.jpg",
+    image:"img/lodejamosaca.jpg",
     times: ["16:10", "19:00", "21:50"],
   },
   {
@@ -75,7 +75,7 @@ const movies = [
     durationMinutes: 103,
     rating: "+18",
     release: "En cartelera",
-    image:"IMG/peliculas/pepitalapistolera.jpg",
+    image:"img/pepitalapistolera.jpg",
     times: ["15:10", "18:00", "20:50"],
   },
   {
@@ -86,7 +86,7 @@ const movies = [
     durationMinutes: 79,
     rating: "+13",
     release: "Estreno",
-    image:"IMG/peliculas/retrato.jpg",
+    image:"img/retrato.jpg",
     times: ["14:10", "16:00", "19:30"],
   },
   {
@@ -97,7 +97,7 @@ const movies = [
     durationMinutes: 72,
     rating: "+18",
     release: "Estreno",
-    image:"IMG/peliculas/elllantodelperro.jpg",
+    image:"img/elllantodelperro.jpg",
     times: ["13:00", "15:00", "17:00"],
   },
   {
@@ -108,7 +108,7 @@ const movies = [
     durationMinutes: 75,
     rating: "ATP",
     release: "Estreno",
-    image:"IMG/peliculas/annemarie.jpg",
+    image:"img/annemarie.jpg",
     times: ["14:00", "17:00", "20:00"],
   },
   {
@@ -119,7 +119,7 @@ const movies = [
     durationMinutes: 70,
     rating: "ATP",
     release: "Estreno",
-    image:"IMG/peliculas/hospitalbritanico.jpg",
+    image:"img/hospitalbritanico.jpg",
     times: ["12:30", "15:30", "18:30"],
   },
   {
@@ -130,7 +130,7 @@ const movies = [
     durationMinutes: 68,
     rating: "ATP",
     release: "Estreno",
-    image:"IMG/peliculas/museodelasubversion.jpg",
+    image:"img/museodelasubversion.jpg",
     times: ["13:00", "16:00", "19:00"],
   },
   {
@@ -141,7 +141,7 @@ const movies = [
     durationMinutes: 64,
     rating: "ATP",
     release: "En cartelera",
-    image:"IMG/peliculas/layeguadetroya.jpg",
+    image:"img/layeguadetroya.jpg",
     times: ["14:00", "17:00", "20:00"],
   },
   {
@@ -152,7 +152,7 @@ const movies = [
     durationMinutes: 66,
     rating: "ATP",
     release: "En cartelera",
-    image:"IMG/peliculas/abuelogaucho.jpg",
+    image:"img/abuelogaucho.jpg",
     times: ["11:00", "14:00", "17:00"],
   },
   {
@@ -163,7 +163,7 @@ const movies = [
     durationMinutes: 126,
     rating: "+13",
     release: "En cartelera",
-    image:"IMG/peliculas/olivia.jpg",
+    image:"img/olivia.jpg",
     times: ["10:00", "14:00", "18:00"],
   },
   {
@@ -174,7 +174,7 @@ const movies = [
     durationMinutes: 122,
     rating: "ATP",
     release: "Estreno",
-    image:"IMG/peliculas/tresadioses.jpg",
+    image:"img/tresadioses.jpg",
     times: ["11:00", "15:00", "19:00"],
   },
   {
@@ -185,7 +185,7 @@ const movies = [
     durationMinutes: 100,
     rating: "+13",
     release: "Estreno",
-    image:"IMG/peliculas/elbañodepapa.jpg",
+    image:"img/elbañodepapa.jpg",
     times: ["14:00", "18:00", "22:00"],
   },
   {
@@ -196,7 +196,7 @@ const movies = [
     durationMinutes: 93,
     rating: "+13",
     release: "Preestreno",
-    image:"IMG/peliculas/madresiniestra.jpg",
+    image:"img/madresiniestra.jpg",
     times: ["11:00", "14:00", "17:00"],
   },
   {
@@ -207,7 +207,7 @@ const movies = [
     durationMinutes: 105,
     rating: "+13",
     release: "Preestreno",
-    image:"IMG/peliculas/losotros.jpg",
+    image:"img/losotros.jpg",
     times: ["10:00", "13:00", "16:00"],
   },
   {
@@ -218,7 +218,7 @@ const movies = [
     durationMinutes: 0,
     rating: "+18",
     release: "Preestreno",
-    image:"IMG/peliculas/jeannedielman.jpg",
+    image:"img/jeannedielman.jpg",
     times: ["10:00", "13:00", "16:00"],
   },
   {
@@ -229,7 +229,7 @@ const movies = [
     durationMinutes: 0,
     rating: "+18",
     release: "Estreno",
-    image:"IMG/peliculas/laconversacion.jpg",
+    image:"img/laconversacion.jpg",
     times: ["10:00", "13:00", "16:00"],
   }
 ]
