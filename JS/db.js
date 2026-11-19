@@ -5,7 +5,7 @@ window.AppDB = {
     // Inicializar Motor SQLite con OPFS
     initDB: async function() {
         if (this.db) return;
-        
+
         const SQL = await initSqlJs({
             locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/${file}`
         });
@@ -16,9 +16,11 @@ window.AppDB = {
         if (opfsData) {
             this.db = new SQL.Database(opfsData);
         } else {
-            // Si no existe localmente, crear esquema inicial de CINE
+            // Si no existe localmente, crear esquema inicial adaptado a Cine
             this.db = new SQL.Database();
             this.db.run(`
+                PRAGMA foreign_keys = ON;
+
                 CREATE TABLE IF NOT EXISTS Cine (
                     id_cine INTEGER PRIMARY KEY AUTOINCREMENT,
                     nom_centrocomercial TEXT,
@@ -120,24 +122,22 @@ window.AppDB = {
                     FOREIGN KEY (id_funcion) REFERENCES Funcion(id_funcion) ON DELETE CASCADE ON UPDATE CASCADE,
                     FOREIGN KEY (id_precio) REFERENCES Precio(id_precio) ON DELETE CASCADE ON UPDATE CASCADE
                 );
+
+                CREATE INDEX IF NOT EXISTS idx_programacion_pelicula ON Programacion(id_pelicula);
+                CREATE INDEX IF NOT EXISTS idx_entradas_funcion ON Entradas(id_funcion);
+                CREATE INDEX IF NOT EXISTS idx_cliente_dni ON Cliente(dni_cli);
             `);
 
-            // Datos iniciales de prueba compatibles con el proyecto Cine
+            // Datos base de infraestructura (sede, sala y tarifa inicial sin títulos hardcodeados)
             this.db.run(`
-                INSERT INTO Cine (nom_centrocomercial, direccion, nombre_cine, cant_salas) 
-                VALUES ('Círculo Centro', 'Av. Rivadavia 1635', 'Círculo Cine Centro', 8);
+                INSERT INTO Cine (nom_centrocomercial, direccion, nombre_cine, cant_salas)
+                VALUES ('Sede Central', 'Av. Rivadavia 1635, CABA', 'Círculo Cine Centro', 8);
 
-                INSERT INTO Sala (id_cine, nro_sala, cant_butacas, sala_estado, nro_butaca, butaca_estado) 
+                INSERT INTO Sala (id_cine, nro_sala, cant_butacas, sala_estado, nro_butaca, butaca_estado)
                 VALUES (1, 1, 48, 'Habilitada', 1, 'Disponible');
 
-                INSERT INTO Pelicula (nombre_pel, duracion_min, calificacion_pel, pais_origen, genero_pel, pel_estado) VALUES 
-                ('4 HISTORIAS INCREIBLES', 82, '+13', 'Argentina', 'Comedia', 'Activa'),
-                ('PERTENENCIAS', 82, 'ATP', 'Argentina', 'Documental', 'Activa'),
-                ('¿QUERES SER MI HIJO?', 98, '+13', 'Argentina', 'Comedia', 'Activa'),
-                ('DESOBEDIENTE', 109, '+13', 'Argentina', 'Documental', 'Activa'),
-                ('LA CASA', 108, '+13', 'Argentina', 'Suspenso', 'Activa'),
-                ('LO DEJAMOS ACA', 98, '+13', 'Argentina', 'Comedia', 'Activa'),
-                ('PEPITA LA PISTOLERA', 103, '+18', 'Argentina', 'Suspenso', 'Activa');
+                INSERT INTO Precio (id_cine, tipo_entrada, dia_semana, monto)
+                VALUES (1, 'General 2D', 'Todos', 4000.00);
             `);
 
             await this.save(); // Guardar archivo inicial en OPFS
@@ -172,20 +172,6 @@ window.AppDB = {
         }
     },
 
-    // --- DESCARGAR ARCHIVO BASE DE DATOS LOCALMENTE ---
-    downloadDB: async function() {
-        const fileData = await this.readFromOPFS();
-        if (!fileData) return alert("No hay datos cargados.");
-        
-        const blob = new Blob([fileData], { type: 'application/x-sqlite3' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = this.fileName;
-        a.click();
-        URL.revokeObjectURL(url);
-    },
-
     // --- RESPALDO A CLOUD BAAS (Supabase Storage / API Externa) ---
     uploadToBaaS: async function(supabaseUrl, supabaseKey, userId) {
         try {
@@ -193,7 +179,7 @@ window.AppDB = {
             if (!fileData) return false;
 
             const blob = new Blob([fileData], { type: 'application/x-sqlite3' });
-            const filePath = `backups/cine_user_${userId}_database.sqlite`;
+            const filePath = `backups/cine_${userId}_database.sqlite`;
 
             const response = await fetch(`${supabaseUrl}/storage/v1/object/cine-backups/${filePath}`, {
                 method: 'POST',
@@ -212,8 +198,25 @@ window.AppDB = {
         }
     },
 
+    // --- DESCARGAR ARCHIVO BASE DE DATOS LOCALMENTE ---
+    downloadDB: async function() {
+        const fileData = await this.readFromOPFS();
+        if (!fileData) return alert("No hay datos cargados.");
+
+        const blob = new Blob([fileData], { type: 'application/x-sqlite3' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = this.fileName;
+        a.click();
+        URL.revokeObjectURL(url);
+    },
+
     // Ejecutador de consultas SQL
     query: function(sql, params = []) {
+        if (!this.db) {
+            throw new Error("La base de datos no está inicializada. Ejecutá await window.AppDB.initDB() primero.");
+        }
         const stmt = this.db.prepare(sql);
         stmt.bind(params);
         const result = [];
