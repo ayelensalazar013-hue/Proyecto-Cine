@@ -1,3 +1,29 @@
+const fotosPeliculas = {
+  "4 HISTORIAS INCREIBLES": "img/4historiasincreibles.jpg",
+  "PERTENENCIAS": "img/pertenencias.jpg",
+  "¿QUERES SER MI HIJO?": "img/queressermihijo.jpg",
+  "DESOBEDIENTE": "img/desobediente.jpg",
+  "LA CASA": "img/lacasa.jpg",
+  "LO DEJAMOS ACA": "img/lodejamosaca.jpg",
+  "PEPITA LA PISTOLERA": "img/pepitalapistolera.jpg",
+  "RETRATO, ELOGIO AL DUELO": "img/retrato.jpg",
+  "EL LLANTO DEL PERRO": "img/elllantodelperro.jpg",
+  "ANNEMARIE": "img/annemarie.jpg",
+  "HOSPITAL BRITANICO": "img/hospitalbritanico.jpg",
+  "MUSEO DE LA SUBVERSION": "img/museodelasubversion.jpg",
+  "LA YEGUA DE TROYA": "img/layeguadetroya.jpg",
+  "ABUELO GAUCHO": "img/abuelogaucho.jpg",
+  "OLIVIA": "img/olivia.jpg",
+  "TRES ADIOSES": "img/tresadioses.jpg",
+  "EL BAÑO DEL PAPA": "img/elbañodepapa.jpg",
+  "MADRE SINIESTRA": "img/madresiniestra.jpg",
+  "LOS OTROS": "img/losotros.jpg",
+  "JEANNE DIELMAN,23,QUAI DU COMMERCE,1080 BRUXELLES": "img/jeannedielman.jpg",
+  "LA CONVERSACION": "img/laconversacion.jpg",
+};
+
+
+
 let movies = [];
 async function cargarPeliculas() {
 
@@ -23,9 +49,7 @@ async function cargarPeliculas() {
         durationMinutes: p.duracion_min,
         rating: p.calificacion_pel,
         release: p.pel_estado,
-
-      image: "img/default.jpg",
-
+        image: fotosPeliculas[p.nombre_pel] || "",
         times: [
             "15:00",
             "18:00",
@@ -156,10 +180,11 @@ function renderMovies() {
             aria-label="Ver horarios de ${movie.title}"
           >
             <img
-              src="${movie.image}"
-              alt=""
-              style="object-position:${movie.imagePosition || "center"}"
-            />
+  src="${movie.image}"
+  alt="Póster de ${movie.title}"
+  style="object-position:${movie.imagePosition || "center"}"
+  onerror="this.style.display='none';"
+/>
             <span class="poster-release">${movie.release}</span>
             <span class="poster-rating">${movie.rating}</span>
             <span class="poster-reveal">Ver horarios ${arrow}</span>
