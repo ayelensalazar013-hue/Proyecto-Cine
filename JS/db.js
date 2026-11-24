@@ -1,3 +1,6 @@
+console.log("DB INICIANDO");
+
+
 window.AppDB = {
     db: null,
     fileName: 'cine_database.sqlite',
@@ -139,7 +142,7 @@ window.AppDB = {
                 INSERT INTO Precio (id_cine, tipo_entrada, dia_semana, monto)
                 VALUES (1, 'General 2D', 'Todos', 4000.00);
 
-  INSERT INTO Pelicula (id_pelicula, nombre_pel, duracion_min, calificacion_pel, pais_origen, genero_pel, pel_estado)
+                INSERT INTO Pelicula (id_pelicula, nombre_pel, duracion_min, calificacion_pel, pais_origen, genero_pel, pel_estado)
 VALUES 
 (1, '4 HISTORIAS INCREIBLES', 82, '+13', 'Argentina', 'Comedia', 'En cartelera'),
 (2, 'PERTENENCIAS', 82, 'ATP', 'Argentina', 'Documental', 'En cartelera'),
@@ -164,7 +167,6 @@ VALUES
 (21, 'LA CONVERSACION', 113, '+18', 'Estados Unidos', 'Suspenso', 'Estreno');
 
 
-                
             `);
 
             await this.save(); // Guardar archivo inicial en OPFS
